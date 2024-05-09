@@ -18,9 +18,6 @@ def create_tables():
     with app.app_context():
         db.create_all()
 
-# Call the function to create tables before running the app
-create_tables()
-
 @app.route("/")
 def home():
     todo_list = Todo.query.all()
@@ -51,4 +48,5 @@ def delete(todo_id):
     return redirect(url_for("home")) 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    create_tables()  # Create tables before running the app
+    app.run(debug=True, host="0.0.0.0", port=4444)
