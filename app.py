@@ -15,7 +15,8 @@ class Todo(db.Model):
 
 # Function to create database tables
 def create_tables():
-    db.create_all()
+    with app.app_context():
+        db.create_all()
 
 # Call the function to create tables before running the app
 create_tables()
