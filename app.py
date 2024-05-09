@@ -13,11 +13,9 @@ class Todo(db.Model):
     title = db.Column(db.String(100))
     complete = db.Column(db.Boolean)
 
-# Ensure that you're using db.create_all() only once, not inside if __name__ == "__main__"
-db.create_all()
-
-@app.before_first_request
-def create_tables():
+# Create the database tables before each request
+@app.before_request
+def before_request():
     db.create_all()
 
 @app.route("/")
