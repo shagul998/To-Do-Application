@@ -13,10 +13,12 @@ class Todo(db.Model):
     title = db.Column(db.String(100))
     complete = db.Column(db.Boolean)
 
-# Create the database tables before each request
-@app.before_request
-def before_request():
+# Function to create database tables
+def create_tables():
     db.create_all()
+
+# Call the function to create tables before running the app
+create_tables()
 
 @app.route("/")
 def home():
